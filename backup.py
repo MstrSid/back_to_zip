@@ -27,13 +27,11 @@ def backupToZip(folder):
                     continue # don't backup the backup ZIP files
                 backupZip.write(os.path.join(foldername, filename))  
         backupZip.close()
-        #shutil.move(zipFileName, back)
         messagebox.showinfo("Результат", "Готово.")
     else:
         sys.exit()
 root = tkinter.Tk()
 root.withdraw()
-# start = filedialog.askdirectory(parent=root,initialdir="/",title='Выберите папку, КОТОРУЮ нужно архивировать')
 start = filedialog.askdirectory(title='Выберите папку, КОТОРУЮ нужно архивировать')
 if start:
     backupToZip(start)
