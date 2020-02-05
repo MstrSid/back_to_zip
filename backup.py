@@ -32,7 +32,7 @@ def backupToZip(folder):
     else:
         sys.exit()
 
-
+#
 root = tkinter.Tk()
 root.withdraw()
 start = filedialog.askdirectory(title='Выберите папку, КОТОРУЮ нужно архивировать')
