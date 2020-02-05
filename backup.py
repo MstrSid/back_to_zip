@@ -5,16 +5,17 @@ import os, zipfile, datetime, shutil, tkinter, sys
 from tkinter import filedialog
 from tkinter import messagebox
 
+
 def backupToZip(folder):
     back = filedialog.askdirectory(title='Выберите папку, КУДА сохранить архив')
     if back:
         folder = os.path.abspath(folder)
         dateraw = datetime.datetime.now()
         date = dateraw.strftime('%Y-%m-%d_%H%M%S')
-        zipFileName = os.path.basename(folder) + "_" + str(date)+".zip" #  составляем имя файла
+        zipFileName = os.path.basename(folder) + "_" + str(date) + ".zip"  # составляем имя файла
         # создать zip
         print("Создается файл %s..." % (zipFileName))
-        backupZip = zipfile.ZipFile(back+"\\"+zipFileName, "w")
+        backupZip = zipfile.ZipFile(back + "\\" + zipFileName, "w")
         # обход дерева папки и сжатие файлов
         print(folder)
         for foldername, subfolders, filenames in os.walk(folder):
@@ -24,12 +25,14 @@ def backupToZip(folder):
             # Добавить в zip все файлы из папки
             for filename in filenames:
                 if filename.startswith(os.path.basename(folder) + '_') and filename.endswith('.zip'):
-                    continue # don't backup the backup ZIP files
-                backupZip.write(os.path.join(foldername, filename))  
+                    continue  # don't backup the backup ZIP files
+                backupZip.write(os.path.join(foldername, filename))
         backupZip.close()
         messagebox.showinfo("Результат", "Готово.")
     else:
         sys.exit()
+
+
 root = tkinter.Tk()
 root.withdraw()
 start = filedialog.askdirectory(title='Выберите папку, КОТОРУЮ нужно архивировать')
